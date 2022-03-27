@@ -16,6 +16,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             string enterOrRead; // allows the player to choose to either enter text to analyse, or to analyse text from a given text file
             bool valid = false; // checks for a valid user input
             string textToAnalyse = " ";
+            bool readFile = false;
             Input textInput = new Input();
 
             while (valid == false)
@@ -34,6 +35,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                     string text = textInput.textFileRead();
                     textToAnalyse = text;
                     valid = true;
+                    readFile = true;
                 }
                 else
                 {
@@ -45,6 +47,14 @@ namespace CMP1903M_Assessment_1_Base_Code
             //creates a new instance and uses the AnalyseText class
             Analyse analyseAll = new Analyse();
             int[] returnedResults = analyseAll.analyseText(textToAnalyse);
+            if (readFile == true)
+            {
+                analyseAll.longWords(textToAnalyse); // only finds long words if reading from the text file
+            }
+            else
+            {
+                analyseAll.frequencyOfLetters(textToAnalyse); // only finds frequency of letters if text is inputted
+            }
 
             //creates a results object to print out all the results
             Results getResults = new Results();

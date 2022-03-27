@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 public class Analyse
 {
@@ -71,4 +72,72 @@ public class Analyse
 		return returnValues;
 
 	}
+
+	public string removePunctuation(string textToAnalyse)
+    {
+		char[] punctuation = { '.', ',', '!', '/', '\'', '*', ' ' };
+
+		//replaces all punctation which whitespace so it isn't counted
+		foreach (char character in textToAnalyse)
+		{
+			if (punctuation.Contains(character))
+			{
+				textToAnalyse = textToAnalyse.Replace(character, ' ');
+			}
+		}
+		return textToAnalyse;
+	}
+
+	public void longWords(string textToAnalyse)
+    {
+		textToAnalyse = removePunctuation(textToAnalyse);
+
+		char[] whitespace = new char[] { ' ', '\t' };//identifies all whitespace in the text
+		string[] listOfWords = textToAnalyse.Split(whitespace);//seperates the words in the string by the whitespace
+
+		List<string> allLongWords = new List<string>();
+
+		foreach (string word in listOfWords)
+        {
+			if (word.Length >= 7) //if a word is longer than 7 characters then it is considered a long word
+            {
+				allLongWords.Add(word);
+            }
+        }
+
+		File.WriteAllLines("allLongWords.txt", allLongWords);
+		string path = Path.GetFullPath("allLongWords.txt");
+		string readLong = File.ReadAllText(path);
+		Console.WriteLine("Long Words:" + readLong);
+	}
+
+	public void frequencyOfLetters(string textToAnalyse)
+    {
+
+		textToAnalyse = removePunctuation(textToAnalyse);
+
+		Dictionary<char, int> characterCount = new Dictionary<char, int>();// creates a dictionary to store the charcater and frequency
+		foreach (char character in textToAnalyse)
+		{
+			if (Char.IsLetter(character))
+            {
+				if (characterCount.ContainsKey(character))//if the character is already in the list, it adds to the count
+				{
+					characterCount[character]++;
+				}
+				else
+				{
+					characterCount[character] = 1;//if it's not already in the list, the count starts at 1
+				}
+            }
+			
+		}
+
+		//prints all the characters and counts
+		foreach (KeyValuePair<char, int> pair in characterCount)
+        {
+			Console.WriteLine("Letter = {0}, Count = {1}", pair.Key, pair.Value);
+        }
+	}
+
 }
