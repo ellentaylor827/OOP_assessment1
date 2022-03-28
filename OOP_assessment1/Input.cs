@@ -26,6 +26,7 @@ namespace OOP_assessment1
 
             }
             string textToAnalyse = "";
+
             foreach (string item in inputtedText)
             {
                 textToAnalyse = textToAnalyse + item; // puts all inputted text into one string

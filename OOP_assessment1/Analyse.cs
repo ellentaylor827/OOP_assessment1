@@ -73,6 +73,7 @@ public class Analyse
 
 	}
 
+	//encapsulation so it can only be accessed by this class
 	private string removePunctuation(string textToAnalyse)
     {
 		char[] punctuation = { '.', ',', '!', '/', '\'', '*', ' ' };

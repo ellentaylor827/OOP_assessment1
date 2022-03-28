@@ -16,6 +16,7 @@ namespace OOP_assessment1
             Console.WriteLine("Number of lowercase:" + returnedValues[4]);
             Console.WriteLine("Number of total characters:" + returnedValues[5]);
 
+
         }
     }
 }
