@@ -73,7 +73,7 @@ public class Analyse
 
 	}
 
-	public string removePunctuation(string textToAnalyse)
+	private string removePunctuation(string textToAnalyse)
     {
 		char[] punctuation = { '.', ',', '!', '/', '\'', '*', ' ' };
 
